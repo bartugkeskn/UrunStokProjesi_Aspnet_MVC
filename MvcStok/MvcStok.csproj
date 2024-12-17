@@ -238,6 +238,9 @@
     <Content Include="Views\Kategori\KategoriListesi.cshtml" />
     <Content Include="Views\Urun\UrunListesi.cshtml" />
     <Content Include="Views\Musteri\MusteriListesi.cshtml" />
+    <Content Include="Views\Kategori\YeniKategori.cshtml" />
+    <Content Include="Views\Musteri\YeniMusteri.cshtml" />
+    <Content Include="Views\Urun\YeniUrun.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
