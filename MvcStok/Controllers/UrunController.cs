@@ -41,5 +41,13 @@ namespace MvcStok.Controllers
             Response.Redirect("/Urun/UrunListesi");
             return View();
         }
+
+        public ActionResult Sil(int id)
+        {
+            var urun = db.TblUrunler.Find(id);
+            db.TblUrunler.Remove(urun);
+            db.SaveChanges();
+            return RedirectToAction("UrunListesi");
+        }
     }
 }

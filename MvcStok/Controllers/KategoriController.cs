@@ -32,5 +32,29 @@ namespace MvcStok.Controllers
             Response.Redirect("/Kategori/KategoriListesi");
             return View();
         }
+
+        public ActionResult Sil(int id)
+        {
+            var kategori = db.TblKategoriler.Find(id);
+            db.TblKategoriler.Remove(kategori);
+            db.SaveChanges();
+            return RedirectToAction("KategoriListesi");
+        }
+
+        [HttpGet]
+        public ActionResult KategoriGuncelle(int id)
+        {
+            var kategori = db.TblKategoriler.Find(id);
+            return View("KategoriGuncelle", kategori);
+        }
+
+        [HttpPost]
+        public ActionResult KategoriGuncelle(TblKategoriler p1)
+        {
+            var kategori = db.TblKategoriler.Find(p1.KATEGORIID);
+            kategori.KATEGORIAD = p1.KATEGORIAD;
+            db.SaveChanges();
+            return RedirectToAction("KategoriListesi");
+        }
     }
 }

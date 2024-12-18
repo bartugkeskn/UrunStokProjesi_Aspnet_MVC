@@ -31,5 +31,30 @@ namespace MvcStok.Controllers
             Response.Redirect("/Musteri/MusteriListesi");
             return View();
         }
+
+        public ActionResult Sil(int id)
+        {
+            var musteri = db.TblMusteriler.Find(id);
+            db.TblMusteriler.Remove(musteri);
+            db.SaveChanges();
+            return RedirectToAction("MusteriListesi");
+        }
+
+        [HttpGet]
+        public ActionResult MusteriGuncelle(int id)
+        {
+            var musteri = db.TblMusteriler.Find(id);
+            return View("MusteriGuncelle", musteri);
+        }
+
+        [HttpPost]
+        public ActionResult MusteriGuncelle(TblMusteriler p1)
+        {
+            var musteri = db.TblMusteriler.Find(p1);
+            musteri.MUSTERIAD = p1.MUSTERIAD;
+            musteri.MUSTERISOYAD = p1.MUSTERISOYAD;
+            db.SaveChanges();
+            return RedirectToAction("MusteriGuncelle");
+        }
     }
 }
