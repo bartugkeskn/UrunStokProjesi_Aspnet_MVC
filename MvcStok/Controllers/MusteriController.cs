@@ -26,6 +26,10 @@ namespace MvcStok.Controllers
         [HttpPost]
         public ActionResult YeniMusteri(TblMusteriler p1)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("YeniMusteri");
+            }
             db.TblMusteriler.Add(p1);
             db.SaveChanges();
             Response.Redirect("/Musteri/MusteriListesi");
@@ -50,11 +54,11 @@ namespace MvcStok.Controllers
         [HttpPost]
         public ActionResult MusteriGuncelle(TblMusteriler p1)
         {
-            var musteri = db.TblMusteriler.Find(p1);
+            var musteri = db.TblMusteriler.Find(p1.MUSTERIID);
             musteri.MUSTERIAD = p1.MUSTERIAD;
             musteri.MUSTERISOYAD = p1.MUSTERISOYAD;
             db.SaveChanges();
-            return RedirectToAction("MusteriGuncelle");
+            return RedirectToAction("MusteriListesi");
         }
     }
 }
