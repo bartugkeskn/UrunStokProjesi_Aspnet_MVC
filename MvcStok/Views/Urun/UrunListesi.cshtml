@@ -1,5 +1,7 @@
 ﻿@using MvcStok.Models.Entity
-@model List<TblUrunler>
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TblUrunler>
 @{
     ViewBag.Title = "UrunListesi";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -33,4 +35,5 @@
     </tbody>
 </table>
 <br />
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("UrunListesi", new { sayfa }))
 <a href="/Urun/YeniUrun" class="btn btn-primary">Yeni Ürün Ekle</a>

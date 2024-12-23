@@ -6,6 +6,13 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@*Arama Butonunun Olduğu Kısım*@
+@using (Html.BeginForm("MusteriListesi", "Musteri", FormMethod.Get))
+            {
+                <p><b>Aranacak Müşteri Adı : </b>@Html.TextBox("p")
+                   <input type="submit" value="Ara"/>
+                </p>
+            }
 
 <table class="table table-bordered">
     <tr>
@@ -14,6 +21,7 @@
         <th>MÜŞTERİ SOYADI</th>
         <th>SİL</th>
         <th>GÜNCELLE</th>
+        <th>ALERT</th>
     </tr>
     <tbody>
         @foreach (var i in Model)
@@ -24,6 +32,7 @@
                 <td>@i.MUSTERISOYAD</td>
                 <td><a href="/Musteri/Sil/@i.MUSTERIID" class="btn btn-danger">Sil</a></td>
                 <td><a href="/Musteri/MusteriGuncelle/@i.MUSTERIID" class="btn btn-warning">Güncelle</a></td>
+                <td>@Html.ActionLink("SİL BUTONU", "Sil", new { id = i.MUSTERIID }, new { @class = "btn btn-danger", onclick = "return confirm('Gerçekten silmek istiyor musunuz?')" })</td> @*Alert işlemi ile silme yapıyoruz.*@
             </tr>
         }
     </tbody>

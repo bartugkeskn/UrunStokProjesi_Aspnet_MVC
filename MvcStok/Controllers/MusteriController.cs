@@ -10,11 +10,18 @@ namespace MvcStok.Controllers
     public class MusteriController : Controller
     {
         // GET: Musteri
-        MvcDbStokEntities1 db = new MvcDbStokEntities1 ();
-        public ActionResult MusteriListesi()
+        MvcDbStokEntities1 db = new MvcDbStokEntities1();
+        public ActionResult MusteriListesi(string p)
         {
-            var degerler = db.TblMusteriler.ToList();
-            return View(degerler);
+            var degerler = from d in db.TblMusteriler select d;
+            if (!string.IsNullOrEmpty(p))
+            {
+                degerler = degerler.Where(m=>m.MUSTERIAD.Contains(p));
+            }
+
+            return View(degerler.ToList());
+            //var degerler = db.TblMusteriler.ToList();
+            //return View(degerler);
         }
 
         [HttpGet]
